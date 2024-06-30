@@ -1,0 +1,42 @@
+import { useEffect } from "react";
+import { useState } from "react";
+
+const Home = () => {
+    const [size, setSize]=useState(0);
+    useEffect(()=>{
+        setSize(window.innerWidth)
+    },[])
+    console.log(size);
+    return (
+        <div className="max-w-screen-xl mx-auto">
+            <div
+                className="hero h-36 md:h-60 lg:h-96 bg-cover bg-no-repeat relative"
+                style={{
+                    backgroundImage: "url(/banner.jpg)",
+                }}>
+                <div className=" "></div>
+                <div className="hero-content  text-center text-white">
+                    <div className="max-w-3xl space-y-7 border">
+                        <h1 className="mb-5 text-3xl font-bold">Expand Your Passion</h1>
+                        <p className="mb-5 border mx-20">
+                        Explore the various club communities presented and build on your interests. Experience a wonderful new world and craft your speciality.
+
+                        </p>
+                        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xl" />
+                        <div className="flex gap-10 mt-3 border justify-center">
+                            <p>Trending Searches</p>
+                            <p className="border rounded-xl px-3">Music Club</p>
+                            <p className="border rounded-xl px-3">art</p>
+                            <p className="border rounded-xl px-3">food</p>
+                            <p className="border rounded-xl px-3">cooking</p>
+                            <p className="border rounded-xl px-3">sports</p>
+                        </div>
+                    </div>
+                </div>
+                <p className="text-white absolute bottom-4 right-6">@yumekon {size}</p>
+            </div>
+        </div>
+    );
+};
+
+export default Home;
