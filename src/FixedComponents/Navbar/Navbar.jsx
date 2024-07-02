@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
@@ -53,7 +54,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end w-[70%]">
-                    <a className="btn">Button</a>
+                   <Link to="/login"> Button</Link>
                 </div>
             </div>
         </div>
