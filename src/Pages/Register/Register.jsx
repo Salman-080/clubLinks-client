@@ -4,18 +4,13 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 
-const Login = () => {
-    const [radioChecked, setRadioChecked] = useState(false);
-    console.log(radioChecked);
+const Register = () => {
     const [passHidden, setPassHidden] = useState(true);
-
-    const handleradio = () => {
-        setRadioChecked(!radioChecked);
-    };
 
     const handlePassHide = () => {
         setPassHidden(!passHidden);
     }
+
     return (
         <div className="min-h-screen bg-no-repeat bg-cover" style={{
             backgroundImage: "url(/bg1.png)",
@@ -35,25 +30,29 @@ const Login = () => {
 
                             </details>
                         </li>
-                        <li><Link to="/register">Sign Up</Link></li>
+                        <li><a>Sign Up</a></li>
 
                         <li><a><FaHome className="w-4 h-4" /></a></li>
                     </ul>
                 </div>
             </div>
 
-            <div className="flex flex-col md:flex-row  border-black max-w-screen-xl mx-auto justify-center gap-3 md:gap-14 lg:gap-28 2xl:gap-32 mt-2 xl:mt-5 2xl:mt-12">
-                <div className="space-y-6  w-[250px] md:w-[310px] 2xl:w-[500px]">
+            <div className="flex flex-col md:flex-row border border-black max-w-screen-xl mx-auto justify-center gap-3 md:gap-14 lg:gap-28 2xl:gap-32 mt-2 xl:mt-5 2xl:mt-12">
+                <div className="space-y-6 border w-[250px] md:w-[310px] 2xl:w-[500px]">
                     <div className="space-y-2">
-                        <h2 className="text-xl md:text-3xl 2xl:text-6xl font-semibold">WelCome Back!</h2>
-                        <p className="text-base md:text-lg 2xl:text-2xl text-gray-600 ">Don’t have an account, <Link to="/register"><span className="text-[#2A3D8F] font-semibold">Sign up</span></Link></p>
+                        <h2 className="text-xl md:text-3xl 2xl:text-6xl font-semibold">Hi!</h2>
+                        <p className="text-base md:text-lg 2xl:text-2xl text-gray-600 ">Already have an account? <Link to="/login"><span className="text-[#2A3D8F] font-semibold">Sign In</span></Link> </p>
                     </div>
 
 
                     <form action="" className="space-y-7">
                         <div className="space-y-1">
                             <p>User Name</p>
-                            <input className="border w-full px-2 py-1 rounded-2xl border-[#2A3D8F] text-[#2A3D8F] focus:outline-none " type="text" />
+                            <input className="border w-full px-2 py-1 rounded-2xl border-[#2A3D8F] text-[#2A3D8F] focus:outline-none " type="text" required />
+                        </div>
+                        <div className="space-y-1">
+                            <p>User Email</p>
+                            <input className="border w-full px-2 py-1 rounded-2xl border-[#2A3D8F] text-[#2A3D8F] focus:outline-none " type="email" required />
                         </div>
                         <div className="border space-y-1">
                             <p>Password</p>
@@ -65,20 +64,6 @@ const Login = () => {
                                         <FaEye onClick={handlePassHide} className="absolute right-4 text-[#9EB0EA] cursor-pointer" />
                                 }
                             </div>
-
-
-                        </div>
-                        <div className="flex border justify-between items-center">
-                            <div className="flex gap-2 items-center">
-                                <input checked={radioChecked}
-                                    onChange={handleradio} type="checkBox" name="radio-2" className="radio  border-[#586bb1] checked:bg-[#A3B3EB]"
-
-                                />
-
-                                <p className="text-sm 2xl:text-base">Remember Me</p>
-                            </div>
-
-                            <p className="text-sm 2xl:text-base text-[#6679be] font-semibold">Forget Password</p>
                         </div>
 
                         <div>
@@ -96,10 +81,8 @@ const Login = () => {
                         <FaApple className="h-10 w-10 2xl:h-16 2xl:w-16" />
                     </div>
 
-
-
                 </div>
-                <div className="md:h-[500px] md:w-[500px] 2xl:w-[700px] 2xl:h-[700px] ">
+                <div className="md:h-[500px] md:w-[500px] 2xl:w-[700px] 2xl:h-[700px] border">
                     <img className="h-full w-full object-contain" src="/logo2.png" alt="" />
                 </div>
             </div>
@@ -109,4 +92,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
