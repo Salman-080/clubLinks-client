@@ -10,7 +10,12 @@ const ClubVerification = () => {
             <div className=" border border-red-600 flex items-center justify-center  min-h-[calc(100vh-24px)]">
                 <div className="border border-black w-[250px] md:w-[300px] lg:w-[550px] 2xl:w-[900px] ">
                     <div>
-                        
+                        <ul className="steps">
+                            <li className="step step-primary">Register</li>
+                            <li className="step step-primary">Choose plan</li>
+                            <li className="step">Purchase</li>
+                            <li className="step">Receive Product</li>
+                        </ul>
                     </div>
 
                     <div className="space-y-5 px-4 backdrop-blur-[5px] py-6" >
