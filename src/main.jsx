@@ -13,6 +13,7 @@ import Register from './Pages/Register/Register';
 import ClubVerification from './Pages/ClubVerification/ClubVerification';
 import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider } from '@material-tailwind/react';
+import Explore from './Pages/Explore/Explore';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/clubVerification",
     element: <ClubVerification></ClubVerification>,
+  },
+  {
+    path: "/explore",
+    element: <Explore></Explore>,
   },
 ]);
 

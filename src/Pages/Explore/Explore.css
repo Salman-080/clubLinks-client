@@ -1,0 +1,33 @@
+
+.nunito-nunitoFont{
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.unica-one-regular {
+    font-family: "Unica One", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+
+  .styled-text_p {
+    color: #364b97; 
+    text-shadow: 
+        -1px -1px 0 rgba(0, 0, 0, 0.2),  
+         1px -1px 0 rgba(0, 0, 0, 0.2),
+        -1px  1px 0 rgba(0, 0, 0, 0.2),
+         1px  1px 0 rgba(0, 0, 0, 0.2);
+}
+.styled-text {
+    font-weight: bold;
+    color: #6c7db9; 
+    text-shadow: 
+        -0.5px -0.5px 0 #000,  
+         0.5px -0.5px 0 #000,
+        -0.5px  0.5px 0 #000,
+         0.5px  0.5px 0 #000;
+}
+
