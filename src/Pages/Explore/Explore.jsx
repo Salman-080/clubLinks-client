@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/Provider";
 import "./Explore.css";
 
 const Explore = () => {
+    const { user, logOut } = useContext(AuthContext);
     return (
         <div className="flex flex-col-reverse md:flex-row md:items-center md:h-screen 2xl:gap-12">
          
@@ -15,6 +18,7 @@ const Explore = () => {
                         <h2 className="line-through">FIND</h2>
                         <h2 className="line-through">YOUR</h2>
                         <h2 className="line-through">TRIBBLE</h2>
+                        
                     </div>
 
                     <div>
@@ -28,7 +32,7 @@ const Explore = () => {
                 </div>
             </div>
             <div className=" w-full h-full">
-                {/* banner */}
+               
                 <img className="h-full w-full" src="/banner2.jpg" alt="" />
             </div>
 

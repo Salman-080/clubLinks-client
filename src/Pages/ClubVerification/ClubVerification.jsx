@@ -12,15 +12,22 @@ import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoMdArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 const ClubVerification = () => {
     const [date, setDate] = useState();
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+    const navigate=useNavigate();
 
     const handleDateSelect = (selectedDate) => {
         setDate(selectedDate);
         setIsPopoverOpen(false);
     };
 
+
+    const handlePreviousPage = () => {
+        navigate(-1); 
+    };
 
 
     return (
@@ -30,7 +37,7 @@ const ClubVerification = () => {
 
             <div className="flex items-center  py-2 pl-6 gap-3">
                 <div className=" flex items-center">
-                   <button className="rounded-3xl w-10 h-5 md:w-12 md:h-8 md:py-1 bg-gray-300 text-gray-700 flex justify-center items-center"><IoMdArrowBack  className="w-full h-full  "/></button> 
+                   <button onClick={handlePreviousPage} className="rounded-3xl w-10 h-5 md:w-12 md:h-8 md:py-1 bg-gray-300 text-gray-700 flex justify-center items-center"><IoMdArrowBack  className="w-full h-full  "/></button> 
                 </div>
 
                 <h2 className="  text-base md:text-lg xl:text-xl font-medium ">Club Verification</h2>

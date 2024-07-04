@@ -14,6 +14,8 @@ import ClubVerification from './Pages/ClubVerification/ClubVerification';
 import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider } from '@material-tailwind/react';
 import Explore from './Pages/Explore/Explore';
+import Provider from './Provider/Provider';
+
 
 const router = createBrowserRouter([
   {
@@ -46,12 +48,19 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <NextUIProvider>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+    <ThemeProvider>
+      <Provider>
+        <NextUIProvider>
 
-    </NextUIProvider>
+
+          <RouterProvider router={router} />
+
+
+
+        </NextUIProvider>
+      </Provider>
+    </ThemeProvider>
+
 
   </React.StrictMode>,
 )
