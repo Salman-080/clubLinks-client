@@ -1,13 +1,14 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/Provider";
-import { FaRegUser, FaSearch } from "react-icons/fa";
+// import { FaRegUser, FaSearch } from "react-icons/fa";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input, User } from "@nextui-org/react";
+import { FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const [value, setValue] = useState(false);
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut, alternatePhoto, setAlternatePhoto } = useContext(AuthContext);
     const [searchActive, setSearchActive] = useState(true);
 
 
@@ -21,7 +22,7 @@ const Navbar = () => {
     const handleLogOut = () => {
         logOut()
             .then(res => {
-
+                setAlternatePhoto("");
             })
             .catch(err => {
 
@@ -38,9 +39,9 @@ const Navbar = () => {
         }
     }
     return (
-        <div className="max-w-screen-xl mx-auto border">
+        <div className="max-w-screen-xl mx-auto ">
             <div className="navbar bg-base-100 py-0">
-                <div className="navbar-start w-[10%]">
+                <div className="navbar-start  w-[35%] md:w-[25%] lg:w-[10%] ">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                             <svg
@@ -59,61 +60,46 @@ const Navbar = () => {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li><a>Item 1</a></li>
-                            <li>
-                                <a>Parent</a>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </li>
-                            <li><a>Item 3</a></li>
+                            <li><a>My Clubs</a></li>
+                            <li><a>Filter</a></li>
+                            <li><a>Help</a></li>
+                            <li><a>Go Pro</a></li>
                         </ul>
                     </div>
-                    <div className="w-20 h-16 md:w-24 lg:w-20 border">
+                    <div className="  w-12 h-12 md:w-16 md:h-16 lg:w-22 lg:h-22 ">
                         <img className="w-full h-full object-contain" src="/logo.png" alt="" />
                     </div>
                 </div>
-                <div className="navbar-center hidden lg:flex border">
+                <div className="navbar-center hidden lg:flex ">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <details>
-                                <summary>Parent</summary>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li><a>Item 3</a></li>
+                        <li><a>My Clubs</a></li>
+                        <li><a>Filter</a></li>
+                        <li><a>Help</a></li>
+                        <li><a>Go Pro</a></li>
                     </ul>
                 </div>
-                <div className="navbar-end w-[70%]  gap-3">
-                    {/* {
+                <div className="navbar-end w-[90%] md:w-[70%]  gap-3">
+                    {
                         searchActive ? <button><FaSearch onClick={handleSearchActive} className="text-black" /></button>
                             :
-                            <Input
-                                // classNames={{
-                                //     base: "max-w-full sm:max-w-[10rem] h-10  ",
-                                //     mainWrapper: "h-full",
-                                //     input: "text-small",
-                                //     inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                            <div className="relative ">
+                                <input className="w-[90px] md:w-[150px] lg:w-[250px] py-2 pl-7 pr-2 rounded-xl border border-black" type="search" name="" id="" />
+                                {/* <Input
+                                
+                                    // isClearable
+                                    type="search"
+                                    // label="Email"
+                                    variant="bordered"
+                                    placeholder="Search Here..."
+                                    // defaultValue="junior@nextui.org"
+                                    // onClear={() => console.log("input cleared")}
+                                    className="max-w-xs"
+                                /> */}
+                                <button className="absolute top-[30%] left-2"><FaSearch onClick={handleSearchActive} className="text-black" /></button>
+                            </div>
 
-                                // }}
-                                className=" h-10 absolute right-0 "
-                                placeholder="Type to search..."
+                    }
 
-                                // startContent={<SearchIcon size={18} />}
-                                // startContent={<FaSearch className="text-white" />}
-                                icon={<FaSearch className="text-black" />}
-                                type="search"
-
-
-
-                            />
-                    } */}
-                    <button><FaSearch onClick={handleSearchActive} className="text-black" /></button>
 
                     {
                         !user && <Link to="/login"><button className="text-sm">Sign In</button></Link>
@@ -121,7 +107,7 @@ const Navbar = () => {
 
 
                     <div>
-                        <button className="bg-blue-600 px-3 py-1 rounded-lg">Create Club</button>
+                        <button className="bg-[#3949AB] px-4 py-2 rounded-lg text-white">Create Club</button>
                     </div>
 
                     {
@@ -133,10 +119,12 @@ const Navbar = () => {
                                         as="button"
                                         avatarProps={{
                                             isBordered: true,
-                                            src: user?.photoURL,
+                                            src:
+                                                alternatePhoto ? alternatePhoto : user?.photoURL
+                                            ,
                                         }}
                                         className="transition-transform"
-                                        // description="@tonyreichert"
+
                                         name={userNameSlice(user?.displayName || "", 20)}
                                     />
                                 </DropdownTrigger>

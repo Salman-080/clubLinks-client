@@ -15,9 +15,9 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const Register = () => {
     const [passHidden, setPassHidden] = useState(true);
 
-    const { createUser, profileInfo, logOut, googleSignIn, fbSignIn, appleSignIn } = useContext(AuthContext);
+    const { createUser, profileInfo, logOut, googleSignIn, fbSignIn, appleSignIn, setAlternatePhoto, user } = useContext(AuthContext);
     const navigate = useNavigate();
-    
+
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -45,7 +45,7 @@ const Register = () => {
             createUser(registerEmail, registerPassword)
                 .then(res => {
                     console.log(res.user)
-                    
+
                     toast.success('Successfully Registered! Login Now', {
                         position: "top-center",
                         autoClose: 5000,
@@ -59,8 +59,6 @@ const Register = () => {
 
                     profileInfo(registerName, registerImage)
                         .then(async (res) => {
-
-
                             setTimeout(() => {
                                 logOut()
                                     .then(res => {
@@ -84,8 +82,8 @@ const Register = () => {
                                 draggable: true,
                                 progress: undefined,
                                 theme: "light",
-                               
-                                });
+
+                            });
 
                         })
 
@@ -101,7 +99,7 @@ const Register = () => {
                         draggable: true,
                         progress: undefined,
                         theme: "light",
-                        
+
                     });
 
                 })
@@ -111,11 +109,22 @@ const Register = () => {
 
     }
 
+    const handleLogOut = () => {
+        logOut()
+            .then(res => {
+                setAlternatePhoto("");
+            })
+            .catch(err => {
+
+            })
+    }
+
 
     const handleFbSignIn = () => {
         fbSignIn()
             .then(res => {
-                const user = res.user;
+                const userFb = res.user;
+                setAlternatePhoto(userFb.photoURL + "?access_token=EAAEUDGyDSJABO7dn8AmPOIKId4cYsGBKZCrWCjs5y6vVDwiynMDhp422VnnzoSy7La9xk5KYr6cgNtSxZBckkAeB5STllEt30rgIlW0Ins8rB5QV4ZAWbZBwpmlDmbSDq6RX90ID96tX6WinGe9XgFtig5gX9x1GRd2EIgLujuugBK5sq78jDAimuZARipm5ZA7IkTyqdbrRAhBNQSAeyruSIs3rZAbBtWys3Mg");
 
                 // This gives you a Facebook Access Token. You can use it to access the Facebook API.
                 const credential = FacebookAuthProvider.credentialFromResult(res);
@@ -142,7 +151,7 @@ const Register = () => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 // The email of the user's account used.
-                const email = error.customData.email;
+                // const email = error.customData.email;
                 // The AuthCredential type that was used.
                 const credential = FacebookAuthProvider.credentialFromError(error);
                 console.log(error.message);
@@ -156,65 +165,65 @@ const Register = () => {
                     progress: undefined,
                     theme: "light",
                 });
-            
+
                 // ...
-              });
+            });
     }
 
 
-    const handleAppleSignIn=()=>{
+    const handleAppleSignIn = () => {
         appleSignIn()
-        .then((result) => {
-            // The signed-in user info.
-            const user = result.user;
-        
-            // Apple credential
-            const credential = OAuthProvider.credentialFromResult(result);
-            const accessToken = credential.accessToken;
-            const idToken = credential.idToken;
-        
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
+            .then((result) => {
+                // The signed-in user info.
+                const user = result.user;
 
-            toast.success('Login Successfull!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
+                // Apple credential
+                const credential = OAuthProvider.credentialFromResult(result);
+                const accessToken = credential.accessToken;
+                const idToken = credential.idToken;
 
+                // IdP data available using getAdditionalUserInfo(result)
+                // ...
+
+                toast.success('Login Successfull!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+
+                });
+
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000)
+            })
+            .catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The credential that was used.
+                const credential = OAuthProvider.credentialFromError(error);
+
+                // ...
+                console.log(error);
+                console.log(error.message);
+                toast.error(errorMessage, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             });
-
-            setTimeout(() => {
-                navigate("/");
-            }, 2000)
-          })
-          .catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The credential that was used.
-            const credential = OAuthProvider.credentialFromError(error);
-        
-            // ...
-            console.log(error);
-            console.log(error.message);
-            toast.error(errorMessage, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-          });
     }
 
     const handleGoogleLogIn = () => {
@@ -278,15 +287,20 @@ const Register = () => {
 
                             </details>
                         </li>
-                        <li><NavLink to="/login">Sign In</NavLink></li>
+                        {
+                            user ? <li onClick={handleLogOut}> <button>Sign Out</button> </li>
+                                :
+                                <li><NavLink to="/login">Sign In</NavLink></li>
+                        }
+
 
                         <li><NavLink to="/"><FaHome className="w-4 h-4" /></NavLink></li>
                     </ul>
                 </div>
             </div>
 
-            <div className="flex flex-col md:flex-row  max-w-screen-xl mx-auto justify-center gap-3 md:gap-14 lg:gap-28 2xl:gap-32 mt-2 xl:mt-5 2xl:mt-4">
-                <div className="space-y-5 lg:space-y-2 2xl:space-y-1  w-[250px] md:w-[310px] 2xl:w-[500px]">
+            <div className="flex flex-col md:flex-row  max-w-screen-xl mx-auto justify-center gap-3 md:gap-0 lg:gap-28 2xl:gap-32 mt-2 xl:mt-5 2xl:mt-4 items-center md:items-start ">
+                <div className="space-y-5 lg:space-y-2 2xl:space-y-1  w-[250px] md:w-[310px] 2xl:w-[500px] md:ml-14 lg:ml-0">
                     <div className="space-y-1">
                         <h2 className="text-xl md:text-3xl 2xl:text-4xl font-semibold">Hi!</h2>
                         <p className="text-base md:text-lg xl:text-base 2xl:text-base text-gray-600 ">Already have an account? <Link to="/login"><span className="text-[#2A3D8F] font-semibold">Sign In</span></Link> </p>
@@ -309,7 +323,7 @@ const Register = () => {
                         <div className=" space-y-1">
                             <p>Password</p>
                             <div className="flex items-center relative ">
-                                <input className="border w-full px-2 py-1 rounded-2xl border-[#2A3D8F] text-[#2A3D8F] focus:outline-none " name="password" type={passHidden ? "password" : "text"} required/>
+                                <input className="border w-full px-2 py-1 rounded-2xl border-[#2A3D8F] text-[#2A3D8F] focus:outline-none " name="password" type={passHidden ? "password" : "text"} required />
                                 {
                                     passHidden ? <FaEyeSlash onClick={handlePassHide} className="absolute right-4 text-[#9EB0EA] cursor-pointer" />
                                         :
@@ -319,7 +333,7 @@ const Register = () => {
                         </div>
 
                         <div>
-                            <button className="bg-[#2A3D8F] w-full py-1 rounded-3xl text-white font-semibold">Sign Up</button>
+                            <button className="bg-[#2A3D8F] md:mt-5 lg:mt-0 w-full py-1 rounded-3xl text-white font-semibold">Sign Up</button>
                         </div>
                     </form>
                     <div className="flex items-center gap-1 mx-4">
@@ -328,9 +342,9 @@ const Register = () => {
                         <div className=" border-t flex-grow border-[#586bb1] "></div>
                     </div>
                     <div className="flex gap-2 justify-between mx-4">
-                    <FcGoogle onClick={handleGoogleLogIn} className="h-7 w-7 xl:h-8 xl:w-8 2xl:h-9 2xl:w-9  " />
-                        <FaFacebook onClick={handleFbSignIn} className="h-7 w-7  xl:h-8 xl:w-8 2xl:h-9 2xl:w-9  text-[#8699DA]" />
-                        <FaApple onClick={handleAppleSignIn} className="h-7 w-7  xl:h-8 xl:w-8 2xl:h-9 2xl:w-9   " />
+                        <FcGoogle onClick={handleGoogleLogIn} className="h-7 w-7 xl:h-8 xl:w-8 2xl:h-9 2xl:w-9 cursor-pointer " />
+                        <FaFacebook onClick={handleFbSignIn} className="h-7 w-7  xl:h-8 xl:w-8 2xl:h-9 2xl:w-9 cursor-pointer text-[#8699DA]" />
+                        <FaApple onClick={handleAppleSignIn} className="h-7 w-7 cursor-pointer xl:h-8 xl:w-8 2xl:h-9 2xl:w-9   " />
                     </div>
 
                 </div>

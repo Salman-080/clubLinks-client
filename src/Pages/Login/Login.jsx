@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/Provider";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { FacebookAuthProvider, OAuthProvider } from "firebase/auth";
+import { FacebookAuthProvider, getAdditionalUserInfo, OAuthProvider } from "firebase/auth";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Link } from "@nextui-org/react";
 
 
@@ -14,7 +14,7 @@ const Login = () => {
     console.log(radioChecked);
     const [passHidden, setPassHidden] = useState(true);
 
-    const { setPassResetRequestSuccess, setPassResetRequestError, passResetRequestSuccess, passResetRequestError, signIn, googleSignIn, resetPassword, fbSignIn, appleSignIn } = useContext(AuthContext);
+    const { setPassResetRequestSuccess, setPassResetRequestError, passResetRequestSuccess, passResetRequestError, signIn, googleSignIn, resetPassword, fbSignIn, appleSignIn, setAlternatePhoto, user, logOut } = useContext(AuthContext);
     const [passResetEmailValue, setPassResetEmailValue] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [userPass, setUserPass] = useState("");
@@ -129,11 +129,31 @@ const Login = () => {
     const handleFbSignIn = () => {
         fbSignIn()
             .then(res => {
-                const user = res.user;
+                const userFb = res.user;
 
                 // This gives you a Facebook Access Token. You can use it to access the Facebook API.
                 const credential = FacebookAuthProvider.credentialFromResult(res);
                 const accessToken = credential.accessToken;
+                console.log(credential);
+                console.log(accessToken);
+                
+                setAlternatePhoto(userFb.photoURL + "?access_token=EAAEUDGyDSJABO7dn8AmPOIKId4cYsGBKZCrWCjs5y6vVDwiynMDhp422VnnzoSy7La9xk5KYr6cgNtSxZBckkAeB5STllEt30rgIlW0Ins8rB5QV4ZAWbZBwpmlDmbSDq6RX90ID96tX6WinGe9XgFtig5gX9x1GRd2EIgLujuugBK5sq78jDAimuZARipm5ZA7IkTyqdbrRAhBNQSAeyruSIs3rZAbBtWys3Mg");
+
+                toast.success('Login Successfull!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+
+                });
+
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000)
             })
             .catch((error) => {
                 // Handle Errors here.
@@ -173,6 +193,21 @@ const Login = () => {
         
             // IdP data available using getAdditionalUserInfo(result)
             // ...
+            toast.success('Login Successfull!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+
+            });
+
+            setTimeout(() => {
+                navigate("/");
+            }, 2000)
           })
           .catch((error) => {
             // Handle Errors here.
@@ -237,6 +272,16 @@ const Login = () => {
             })
     }
 
+    const handleLogOut = () => {
+        logOut()
+            .then(res => {
+                setAlternatePhoto("");
+            })
+            .catch(err => {
+
+            })
+    }
+
     const handleEmailForReset = (e) => {
         // console.log(e.currentTarget.value)
         setPassResetEmailValue(e.currentTarget.value); //email address from input field for reset password
@@ -276,17 +321,22 @@ const Login = () => {
 
                             </details>
                         </li>
-                        <li><NavLink to="/register">Sign Up</NavLink></li>
+                        {
+                            user ? <li onClick={handleLogOut}> <button>Sign Out</button> </li>
+                                :
+                                <NavLink to="/register">Sign Up</NavLink>
+                        }
 
-                        <li><NavLink href="/"><FaHome className="w-4 h-4" /></NavLink></li>
+                        <li><NavLink to="/"><FaHome className="w-4 h-4" /></NavLink></li>
                     </ul>
                 </div>
             </div>
 
-            <div className="flex flex-col md:flex-row  border-black max-w-screen-xl mx-auto justify-center gap-3 md:gap-14 lg:gap-28 2xl:gap-32 mt-2 xl:mt-5 2xl:mt-4">
-                <div className="space-y-5 lg:space-y-3 2xl:space-y-2  w-[250px] md:w-[310px] 2xl:w-[500px]">
+            <div className="flex flex-col md:flex-row  border-black max-w-screen-xl mx-auto justify-center gap-3 md:gap-0 lg:gap-28 2xl:gap-32 mt-2 xl:mt-5 2xl:mt-4 items-center md:items-start">
+                <div className="space-y-5 lg:space-y-3 2xl:space-y-2  w-[250px] md:w-[360px] 2xl:w-[500px]  md:ml-6 lg:ml-0">
                     <div className="space-y-2">
                         <h2 className="text-xl md:text-3xl 2xl:text-4xl font-semibold">WelCome Back!</h2>
+                        
                         <p className="text-base md:text-lg 2xl:text-base text-gray-600 ">Don’t have an account, <NavLink to="/register"><span className="text-[#2A3D8F] font-semibold">Sign up</span></NavLink></p>
                         
                     </div>

@@ -47,7 +47,7 @@ const ClubVerification = () => {
 
             </div>
             <div className="flex items-center justify-center  min-h-[calc(100vh-50px)]">
-                <div className="border border-gray-200 w-[250px] md:w-[300px] lg:w-[550px] 2xl:w-[900px] py-4">
+                <div className="border border-gray-200 w-[400px] md:w-[650px] lg:w-[700px] xl:w-[800px] 2xl:w-[920px] py-4 mt-3 md:mt-2">
                     <div className=" flex items-center justify-center mx-6">
                         <div className="h-10 w-10 bg-[#3e5090] border border-[#3e5090] text-white rounded-full text-center flex items-center justify-center">
                             1
