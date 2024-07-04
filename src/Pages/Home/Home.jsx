@@ -33,7 +33,7 @@ const Home = () => {
                 <p className="text-white absolute bottom-2 lg:bottom-4 right-6 text-xs md:text-base">@yumekon</p>
             </div>
 
-            <div className="  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center mt-8 mb-8 gap-5">
+            <div className="  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center mt-8 2xl:mt-16 mb-8 gap-5">
                 <div className="relative w-64 h-52 border-[44px] rounded-2xl border-[#F6DAF5] bg-[#F6DAF5]">
                     <div className="absolute inset-0  rounded-2xl ">
                         <div className="w-full h-full bg-[#F5C5CF] rounded-2xl border-[#D2B9D1]">
