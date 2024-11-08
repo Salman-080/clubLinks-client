@@ -31,7 +31,7 @@ const ClubVerification = () => {
 
 
     return (
-        <div className="min-h-screen bg-no-repeat bg-cover " style={{
+        <div className="min-h-screen bg-no-repeat bg-cover max-w-[1280px] mx-auto" style={{
             backgroundImage: "url(/bg1.png)",
         }}>
 

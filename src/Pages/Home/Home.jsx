@@ -5,7 +5,7 @@ import "./Home.css"
 const Home = () => {
    
     return (
-        <div className="max-w-screen-xl mx-auto">
+        <div className="max-w-[1280px] mx-auto ">
             <div
                 className="hero h-60 md:h-72 lg:h-96 w-full  bg-cover bg-no-repeat relative"
                 style={{
@@ -13,24 +13,25 @@ const Home = () => {
                 }}>
                 <div className=" "></div>
                 <div className="hero-content  text-center text-white">
-                    <div className="max-w-3xl  space-y-3 lg:space-y-7 ">
+                    <div className="max-w-3xl md:max-w-[800px]  space-y-3 lg:space-y-7 ">
                         <h1 className=" md:mb-5 text-xl lg:text-3xl font-bold">Expand Your Passion</h1>
                         <p className="mb-1 md:mb-5  md:mx-20 text-sm md:text-base lg:text-lg">
                             Explore the various club communities presented and build on your interests. Experience a wonderful new world and craft your speciality.
 
                         </p>
                         <input type="text" placeholder="Type here" className="input input-bordered md:w-full md:max-w-xl h-6 md:h-8 lg:h-12 text-black " />
-                        <div className="flex gap-3 md:gap-10 mt-3  justify-center">
+                        <div className="flex gap-3 md:gap-6 mt-3  justify-center">
                             <p className="text-xs md:text-base">Trending Searches</p>
-                            <p className=" border rounded-xl px-1 md:px-3 text-xs md:text-base">Music Club</p>
-                            <p className="border rounded-xl px-1 md:px-3 text-xs md:text-base">art</p>
-                            <p className="border rounded-xl px-1 md:px-3 text-xs md:text-base" >food</p>
-                            <p className="border rounded-xl px-1 md:px-3 text-xs md:text-base">cooking</p>
-                            <p className="border rounded-xl px-1 md:px-3 text-xs md:text-base">sports</p>
+                            <p className=" border rounded-xl px-1 md:px-3 lg:px-4 text-xs md:text-base">music club</p>
+                            <p className="border rounded-xl px-1 md:px-3 lg:px-4 text-xs md:text-base">art</p>
+                            <p className="border rounded-xl px-1 md:px-3 lg:px-4 text-xs md:text-base" >food</p>
+                            <p className="border rounded-xl px-1 md:px-3 lg:px-4 text-xs md:text-base">cooking</p>
+                            <p className="border rounded-xl px-1 md:px-3 lg:px-4 text-xs md:text-base">sports</p>
+                            <p className="border rounded-xl px-1 md:px-3 lg:px-4 text-xs md:text-base">book club</p>
                         </div>
                     </div>
                 </div>
-                <p className="text-white absolute bottom-2 lg:bottom-4 right-6 text-xs md:text-base">@yumekon</p>
+                <p className="text-white absolute bottom-2 lg:bottom-4 right-6 text-xs md:text-sm">@yumekon</p>
             </div>
 
             <div className="  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center mt-8 2xl:mt-16 mb-8 gap-5">

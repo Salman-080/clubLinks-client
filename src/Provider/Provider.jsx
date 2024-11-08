@@ -5,6 +5,7 @@ import { FacebookAuthProvider, GoogleAuthProvider, OAuthProvider, createUserWith
 
 export const AuthContext = createContext(null);
 const Provider = ({ children }) => {
+  const fbAccessToken=import.meta.env.VITE_fb_token;
   const [user, setUser] = useState(null);
 
   const googleProvider = new GoogleAuthProvider();
@@ -66,7 +67,7 @@ const Provider = ({ children }) => {
           // Password reset email sent!
           // ..
           console.log(res);
-          setPassResetRequestSuccess("A password reset link is sent to your email. Please check your email!");
+          setPassResetRequestSuccess("If you have already registered with this email, then a password reset link has already been sent to your email. Please check your email!");
 
         })
         .catch((error) => {
@@ -127,7 +128,8 @@ const Provider = ({ children }) => {
     passResetRequestError,
     setPassResetRequestSuccess,
     setPassResetRequestError,
-    alternatePhoto
+    alternatePhoto,
+    fbAccessToken
 
   }
   console.log(user)

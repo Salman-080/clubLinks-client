@@ -14,7 +14,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const Register = () => {
     const [passHidden, setPassHidden] = useState(true);
 
-    const { createUser, profileInfo, logOut, googleSignIn, fbSignIn, appleSignIn, setAlternatePhoto, user } = useContext(AuthContext);
+    const { createUser, profileInfo, logOut, googleSignIn, fbSignIn, appleSignIn, setAlternatePhoto, user, fbAccessToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
 
@@ -123,7 +123,7 @@ const Register = () => {
         fbSignIn()
             .then(res => {
                 const userFb = res.user;
-                setAlternatePhoto(userFb.photoURL + "?access_token=EAAEUDGyDSJABO7dn8AmPOIKId4cYsGBKZCrWCjs5y6vVDwiynMDhp422VnnzoSy7La9xk5KYr6cgNtSxZBckkAeB5STllEt30rgIlW0Ins8rB5QV4ZAWbZBwpmlDmbSDq6RX90ID96tX6WinGe9XgFtig5gX9x1GRd2EIgLujuugBK5sq78jDAimuZARipm5ZA7IkTyqdbrRAhBNQSAeyruSIs3rZAbBtWys3Mg");
+                setAlternatePhoto(userFb.photoURL + `?access_token=${fbAccessToken}`);
 
                 // This gives you a Facebook Access Token. You can use it to access the Facebook API.
                 const credential = FacebookAuthProvider.credentialFromResult(res);
@@ -268,12 +268,12 @@ const Register = () => {
     }
 
     return (
-        <div className="min-h-screen bg-no-repeat bg-cover" style={{
+        <div className="min-h-screen bg-no-repeat bg-cover max-w-[1280px] mx-auto" style={{
             backgroundImage: "url(/bg1.png)",
         }}>
-            <div className="flex justify-between">
-                <div className="h-[68px] w-[68px]">
-                    <img className="h-full w-full object-contain" src="/logo.png" alt="" />
+            <div className="flex justify-between items-center">
+                <div className="w-12 h-12 md:w-16 md:h-16 lg:w-22 lg:h-22">
+                <NavLink to="/"><img className="h-full w-full object-contain" src="/logo.png" alt="" /></NavLink>  
                 </div>
                 <div className="">
                     <ul className="menu menu-horizontal px-1 items-center gap-2">
@@ -298,7 +298,7 @@ const Register = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col md:flex-row  max-w-screen-xl mx-auto justify-center gap-3 md:gap-0 lg:gap-28 2xl:gap-32 mt-2 xl:mt-5 2xl:mt-4 items-center md:items-start ">
+            <div className="flex flex-col md:flex-row  justify-center gap-3 md:gap-0 lg:gap-28 2xl:gap-32 mt-2 xl:mt-5 2xl:mt-4 items-center md:items-start ">
                 <div className="space-y-5 lg:space-y-2 2xl:space-y-1  w-[250px] md:w-[310px] 2xl:w-[500px] md:ml-14 lg:ml-0">
                     <div className="space-y-1">
                         <h2 className="text-xl md:text-3xl 2xl:text-4xl font-semibold">Hi!</h2>

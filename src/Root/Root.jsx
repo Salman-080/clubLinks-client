@@ -6,7 +6,7 @@ const Root = () => {
     const location=useLocation();
     console.log(location);
     return (
-        <div>
+        <div className="max-w-[1280px] mx-auto">
          <Navbar></Navbar>
             
             <Outlet></Outlet>

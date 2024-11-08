@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/Provider";
 // import { FaRegUser, FaSearch } from "react-icons/fa";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input, User } from "@nextui-org/react";
@@ -39,8 +39,8 @@ const Navbar = () => {
         }
     }
     return (
-        <div className="max-w-screen-xl mx-auto ">
-            <div className="navbar bg-base-100 py-0">
+        <div className="max-w-[1280px] mx-auto  ">
+            <div className="navbar bg-base-100 py-0 ">
                 <div className="navbar-start  w-[35%] md:w-[25%] lg:w-[10%] ">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -66,8 +66,8 @@ const Navbar = () => {
                             <li><a>Go Pro</a></li>
                         </ul>
                     </div>
-                    <div className="  w-12 h-12 md:w-16 md:h-16 lg:w-22 lg:h-22 ">
-                        <img className="w-full h-full object-contain" src="/logo.png" alt="" />
+                    <div className="  w-12 h-12 md:w-16 md:h-16 lg:w-22 lg:h-22">
+                    <NavLink to="/"><img className="h-full w-full object-contain" src="/logo.png" alt="" /></NavLink>  
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex ">
@@ -78,7 +78,7 @@ const Navbar = () => {
                         <li><a>Go Pro</a></li>
                     </ul>
                 </div>
-                <div className="navbar-end w-[90%] md:w-[70%]  gap-3">
+                <div className="navbar-end w-[90%] md:w-[70%]   gap-3">
                     {
                         searchActive ? <button><FaSearch onClick={handleSearchActive} className="text-black" /></button>
                             :
